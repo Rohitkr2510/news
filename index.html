@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News </title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        .news-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #e8f0fe;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+
+        .news-item:hover {
+            background-color: #d2e3fc;
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .pagination button {
+            padding: 12px 30px;
+            margin: 5px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .pagination button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .pagination button:not(:disabled):hover {
+            background-color: #004999;
+            transform: scale(1.05);
+        }
+
+        #newsDetail h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+        }
+
+        #newsDetail p {
+            line-height: 1.6;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        #backBtn {
+            padding: 10px 25px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #backBtn:hover {
+            background-color: #004999;
+            transform: scale(1.05);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container" id="newsContainer">
+        <h1>Latest News</h1>
+
+        <div id="newsList"></div>
+
+        <div class="pagination">
+            <button id="prevBtn" onclick="changePage(-1)" disabled>Previous</button>
+            <button id="nextBtn" onclick="changePage(1)">Next</button>
+        </div>
+    </div>
+
+    <script defer>
+
+        const newsData = [
+            {
+                title: "India's First AI-Powered Traffic Management System Launched in Bengaluru",
+                content: `
+                <p>Bengaluru, known as India’s Silicon Valley, has taken a significant step towards tackling its notorious traffic congestion by launching the country’s first AI-powered traffic management system. The system, inaugurated on January 19, 2025, aims to optimize traffic flow, reduce delays, and enhance road safety across the city.</p>
+                <p>Developed by the Bruhat Bengaluru Mahanagara Palike (BBMP) in collaboration with tech companies, the system employs real-time data from cameras, sensors, and GPS-enabled vehicles. Advanced algorithms analyze the data to predict traffic patterns, adjust signal timings, and provide live updates to commuters through mobile apps and digital boards installed at major intersections.</p>
+                <p>According to BBMP officials, the AI system has been implemented at 50 key junctions in the city during its first phase. Over the next year, it will expand to cover 300 intersections. The project, worth ₹150 crore, is expected to reduce average commute times by 30%.</p>
+                <p>Speaking at the launch, Karnataka Chief Minister Siddaramaiah praised the initiative as a game-changer for urban mobility. “This system aligns with Bengaluru’s vision of becoming a smart city and showcases how technology can solve real-world problems,” he said.</p>
+                <p>Local residents and commuters have welcomed the initiative but expressed concerns about its success in handling peak-hour congestion. Experts emphasize the need for public cooperation and adherence to traffic rules for the system to deliver maximum benefits.</p>
+                <p>If successful, Bengaluru’s AI-driven traffic solution could set a benchmark for other Indian cities grappling with similar challenges.</p>
+            `
+            },
+            {
+                title: "Saif Ali Khan Recovering After Stabbing Incident at Mumbai Residence",
+                content: `
+                <p>Bollywood actor Saif Ali Khan is recovering in Lilavati Hospital following a shocking stabbing incident at his Bandra residence on January 16, 2025. The attack occurred during a burglary when the assailant inflicted severe injuries on Khan’s neck, spine, and hands. Doctors have confirmed that he underwent surgery and is now in stable condition.</p>
+                <p>The Mumbai police have arrested a suspect identified as Mohammad Shariful Islam Shahzad, a Bangladeshi national using a false identity. Shahzad, who had been working through a housekeeping agency, reportedly confessed to the crime. Investigations suggest the attacker may have been hiding inside the house before the attack, as no signs of forced entry were found. Authorities are now probing the possibility of insider assistance.</p>
+                <p>Khan’s wife, actress Kareena Kapoor Khan, has urged the media to respect their privacy, especially as their family processes this traumatic event. The incident has sparked concerns about personal security among Bollywood celebrities and residents of Mumbai alike.</p>
+                <p>Saif Ali Khan, a Padma Shri awardee and one of Bollywood's leading actors, has received overwhelming support from fans and colleagues, all wishing him a speedy recovery.</p>
+            `
+            },
+            {
+                title: "Government Proposes New Bill to Strengthen Data Privacy Laws",
+                content: `
+                <p>New Delhi: In a significant move to address growing concerns over data privacy, the government introduced the Personal Data Protection Bill, 2025, in Parliament on Monday. The proposed legislation aims to safeguard citizens' personal data while ensuring responsible data usage by private and public entities.</p>
+                <p>The bill outlines comprehensive guidelines, including mandatory user consent for data collection, stringent penalties for data breaches, and the establishment of an independent Data Protection Authority (DPA) to oversee compliance. Addressing Parliament, Union Minister for Electronics and Information Technology, Rajesh Sharma, said, "This bill is a step towards empowering citizens in the digital era and aligning India with global privacy standards."</p>
+                <p>However, the bill has sparked debate. Opposition parties have raised concerns over certain provisions granting broad exemptions to government agencies, questioning their impact on privacy. "While the bill is essential, it must not compromise the fundamental rights of citizens," said opposition MP Meera Rao.</p>
+                <p>Experts have welcomed the initiative but stressed the need for transparent implementation. Legal analyst Priya Menon remarked, "Ensuring accountability and minimizing misuse of exemptions are crucial for the success of this legislation."</p>
+                <p>As discussions continue in Parliament, the bill’s approval is seen as a crucial step toward building a secure digital ecosystem in India.</p>
+            `
+            },
+            {
+                title: "India Clinches Historic Victory in Cricket Test Series Against Australia",
+                content: `
+                <p>Sydney: India secured a historic 3-1 series win over Australia after an exhilarating final Test at the Sydney Cricket Ground. The victory solidified India’s position as the top team in the ICC Test Rankings and thrilled cricket fans worldwide.</p>
+                <p>Chasing a challenging target of 275 runs, India relied on the experienced leadership of captain Rohit Sharma, who scored a remarkable 128 runs. He was ably supported by young opener Shubman Gill, who contributed a composed 72. The bowling attack, led by Jasprit Bumrah and Ravindra Jadeja, dismantled Australia’s batting lineup, taking crucial wickets in key moments.</p>
+                <p>“This win is the result of incredible teamwork and persistence. Everyone played their role perfectly,” Sharma said during the post-match presentation. He dedicated the win to the fans, whose support, both at home and abroad, fueled the team's energy.</p>
+                <p>The series win marks a key milestone for Indian cricket, especially as they prepare for the upcoming ICC World Test Championship final. Celebrations erupted across India, with cricket enthusiasts hailing the team’s performance on social media.</p>
+                <p>Australia’s captain, Pat Cummins, acknowledged India’s dominance, stating, “They were the better team throughout the series.” As the cricketing world lauds India’s efforts, this victory reinforces their legacy as a powerhouse in Test cricket.</p>
+            `
+            },
+            {
+                title: "Saif Ali Khan Recovering Well After Minor Surgery",
+                content: `
+                <p>Mumbai: Bollywood actor Saif Ali Khan is on the road to recovery after undergoing a minor knee surgery last week. Sources close to the actor confirmed that the procedure went smoothly and that Saif is now focused on rehabilitation.</p>
+                <p>The 53-year-old actor, known for his versatility and fitness, addressed fans through a brief statement: "Thank you for your concern and good wishes. I’m doing well and will be back to work soon." He was recently seen leaving a Bandra clinic, smiling and waving at the paparazzi, reassuring fans of his progress.</p>
+                <p>Saif’s wife, Kareena Kapoor Khan, also shared an update on Instagram, thanking supporters for their prayers and expressing gratitude for the medical team. Fans flooded social media with wishes for his speedy recovery, with the hashtag #GetWellSoonSaif trending briefly.</p>
+                <p>The actor is expected to resume shooting for his upcoming action film, where he plays a pivotal role. His schedule had been adjusted to accommodate recovery time. Industry insiders praised Saif’s dedication to maintaining his fitness despite the setback.</p>
+                <p>As one of Bollywood’s most beloved stars, Saif’s health update has brought relief to fans and colleagues alike. The actor’s return to the silver screen is eagerly awaited.</p>
+            `
+            },
+            {
+                title: "Prayagraj Gears Up for Grand Mahakumbh 2025",
+                content: `
+                <p>Prayagraj: Preparations for the Mahakumbh 2025, the world’s largest religious gathering, are in full swing as millions of pilgrims are expected to flock to Prayagraj starting in January. The event, held every 12 years, is a spiritual milestone for devotees seeking to bathe in the holy confluence of the Ganga, Yamuna, and the mythical Saraswati rivers.</p>
+                <p>State authorities are leaving no stone unturned to ensure a seamless experience. Chief Minister Yogi Adityanath recently reviewed the arrangements, emphasizing safety, sanitation, and crowd management. Key developments include expanded ghats for bathing, an upgraded sewage system, and eco-friendly initiatives such as solar-powered facilities and plastic-free zones.</p>
+                <p>Officials are also building a temporary tent city to accommodate the anticipated 10 crore pilgrims. Special trains and buses have been scheduled to manage the influx, while healthcare services are being bolstered to address emergencies.</p>
+                <p>Religious leaders have expressed their enthusiasm for the event. "The Mahakumbh is not just a gathering; it’s a divine experience that uplifts the soul," said Swami Atmanand, a prominent spiritual figure.</p>
+                <p>With an emphasis on preserving the environment and providing a safe experience, Prayagraj is set to host an unforgettable Mahakumbh. Devotees across India and abroad eagerly await this sacred convergence.</p>
+            `
+            }
+        ];
+        let currentPage = 1;
+        const itemsPerPage = 3;
+        const totalPages = Math.ceil(newsData.length / itemsPerPage);
+
+        function displayNews() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, newsData.length);
+            const newsList = document.getElementById('newsList');
+            newsList.innerHTML = '';
+
+            for (let i = startIndex; i < endIndex; i++) {
+                const newsItem = document.createElement('div');
+                newsItem.classList.add('news-item');
+                newsItem.innerHTML = newsData[i].title;
+                newsItem.onclick = () => openNewsPage(i);
+                newsList.appendChild(newsItem);
+            }
+
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            displayNews();
+        }
+
+        function openNewsPage(index) {
+            const newsItem = newsData[index];
+            const newsList = document.getElementById('newsList');
+            const pagination = document.querySelector('.pagination');
+
+            // Hide the news list and pagination buttons
+            newsList.style.display = 'none';
+            pagination.style.display = 'none';
+
+            // Create a new div for the full news item
+            const newsDetail = document.createElement('div');
+            newsDetail.id = 'newsDetail';
+            newsDetail.innerHTML = `
+        <h1>${newsItem.title}</h1>
+        <p>${newsItem.content}</p>
+        <div class="pagination">
+            <button id="backBtn">Back to News</button>
+        </div>
+    `;
+            document.getElementById('newsContainer').appendChild(newsDetail);
+
+            // Add the event listener for the back button
+            document.getElementById('backBtn').onclick = function () {
+                newsDetail.remove(); // Remove the news detail
+                newsList.style.display = 'block'; // Show the news list
+                pagination.style.display = 'block'; // Show the pagination buttons
+                displayNews(); // Refresh the news list
+            };
+        }
+        displayNews();
+    </script>
+
+</body>
+
+</html>
