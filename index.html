@@ -4,113 +4,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News </title>
+    <title>Latest News</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
         }
 
         .container {
-            max-width: 90%;
-            margin: 40px auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         h1 {
             text-align: center;
+            color: #333;
             font-size: 2.5em;
-            color: #444;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .news-item {
-            margin-bottom: 25px;
+            background-color: #fff;
             padding: 20px;
-            background-color: #e8f0fe;
             border-radius: 8px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            font-size: 1.1em;
-            line-height: 1.5;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
-        .news-item:hover {
-            background-color: #d2e3fc;
-            transform: scale(1.02);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        .news-item h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .news-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         .pagination {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .pagination button {
-            padding: 12px 30px;
-            margin: 5px;
-            background-color: #0066cc;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 0 10px;
         }
 
         .pagination button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
+            background-color: #aaa;
         }
 
-        .pagination button:not(:disabled):hover {
-            background-color: #004999;
-            transform: scale(1.05);
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .news-item {
+                padding: 15px;
+            }
+
+            .news-item h2 {
+                font-size: 1.5em;
+            }
+
+            .pagination button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
         }
 
-        #newsDetail h1 {
-            font-size: 2.2em;
-            margin-bottom: 15px;
-        }
+        @media (max-width: 480px) {
+            .news-item h2 {
+                font-size: 1.2em;
+            }
 
-        #newsDetail p {
-            line-height: 1.6;
-            color: #555;
-            font-size: 1.1em;
-        }
-
-        #backBtn {
-            padding: 10px 25px;
-            background-color: #0066cc;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        #backBtn:hover {
-            background-color: #004999;
-            transform: scale(1.05);
+            .pagination button {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
         }
     </style>
-
 </head>
 
 <body>
-
     <div class="container" id="newsContainer">
         <h1>Latest News</h1>
-
         <div id="newsList"></div>
-
         <div class="pagination">
             <button id="prevBtn" onclick="changePage(-1)" disabled>Previous</button>
             <button id="nextBtn" onclick="changePage(1)">Next</button>
@@ -118,10 +116,10 @@
     </div>
 
     <script defer>
-
         const newsData = [
             {
                 title: "India's First AI-Powered Traffic Management System Launched in Bengaluru",
+                image: ".\\assets\\4.jpg",
                 content: `
                 <p>Bengaluru, known as India’s Silicon Valley, has taken a significant step towards tackling its notorious traffic congestion by launching the country’s first AI-powered traffic management system. The system, inaugurated on January 19, 2025, aims to optimize traffic flow, reduce delays, and enhance road safety across the city.</p>
                 <p>Developed by the Bruhat Bengaluru Mahanagara Palike (BBMP) in collaboration with tech companies, the system employs real-time data from cameras, sensors, and GPS-enabled vehicles. Advanced algorithms analyze the data to predict traffic patterns, adjust signal timings, and provide live updates to commuters through mobile apps and digital boards installed at major intersections.</p>
@@ -133,6 +131,7 @@
             },
             {
                 title: "Saif Ali Khan Recovering After Stabbing Incident at Mumbai Residence",
+                image: ".\\assets\\2.jpg",
                 content: `
                 <p>Bollywood actor Saif Ali Khan is recovering in Lilavati Hospital following a shocking stabbing incident at his Bandra residence on January 16, 2025. The attack occurred during a burglary when the assailant inflicted severe injuries on Khan’s neck, spine, and hands. Doctors have confirmed that he underwent surgery and is now in stable condition.</p>
                 <p>The Mumbai police have arrested a suspect identified as Mohammad Shariful Islam Shahzad, a Bangladeshi national using a false identity. Shahzad, who had been working through a housekeeping agency, reportedly confessed to the crime. Investigations suggest the attacker may have been hiding inside the house before the attack, as no signs of forced entry were found. Authorities are now probing the possibility of insider assistance.</p>
@@ -142,6 +141,7 @@
             },
             {
                 title: "Government Proposes New Bill to Strengthen Data Privacy Laws",
+                image: ".\\assets\\5.jpg",
                 content: `
                 <p>New Delhi: In a significant move to address growing concerns over data privacy, the government introduced the Personal Data Protection Bill, 2025, in Parliament on Monday. The proposed legislation aims to safeguard citizens' personal data while ensuring responsible data usage by private and public entities.</p>
                 <p>The bill outlines comprehensive guidelines, including mandatory user consent for data collection, stringent penalties for data breaches, and the establishment of an independent Data Protection Authority (DPA) to oversee compliance. Addressing Parliament, Union Minister for Electronics and Information Technology, Rajesh Sharma, said, "This bill is a step towards empowering citizens in the digital era and aligning India with global privacy standards."</p>
@@ -152,6 +152,7 @@
             },
             {
                 title: "India Clinches Historic Victory in Cricket Test Series Against Australia",
+                image: ".\\assets\\3.jpg",
                 content: `
                 <p>Sydney: India secured a historic 3-1 series win over Australia after an exhilarating final Test at the Sydney Cricket Ground. The victory solidified India’s position as the top team in the ICC Test Rankings and thrilled cricket fans worldwide.</p>
                 <p>Chasing a challenging target of 275 runs, India relied on the experienced leadership of captain Rohit Sharma, who scored a remarkable 128 runs. He was ably supported by young opener Shubman Gill, who contributed a composed 72. The bowling attack, led by Jasprit Bumrah and Ravindra Jadeja, dismantled Australia’s batting lineup, taking crucial wickets in key moments.</p>
@@ -162,6 +163,7 @@
             },
             {
                 title: "Saif Ali Khan Recovering Well After Minor Surgery",
+                image: ".\\assets\\6.jpg",
                 content: `
                 <p>Mumbai: Bollywood actor Saif Ali Khan is on the road to recovery after undergoing a minor knee surgery last week. Sources close to the actor confirmed that the procedure went smoothly and that Saif is now focused on rehabilitation.</p>
                 <p>The 53-year-old actor, known for his versatility and fitness, addressed fans through a brief statement: "Thank you for your concern and good wishes. I’m doing well and will be back to work soon." He was recently seen leaving a Bandra clinic, smiling and waving at the paparazzi, reassuring fans of his progress.</p>
@@ -172,6 +174,7 @@
             },
             {
                 title: "Prayagraj Gears Up for Grand Mahakumbh 2025",
+                image: ".\\assets\\1.jpg",
                 content: `
                 <p>Prayagraj: Preparations for the Mahakumbh 2025, the world’s largest religious gathering, are in full swing as millions of pilgrims are expected to flock to Prayagraj starting in January. The event, held every 12 years, is a spiritual milestone for devotees seeking to bathe in the holy confluence of the Ganga, Yamuna, and the mythical Saraswati rivers.</p>
                 <p>State authorities are leaving no stone unturned to ensure a seamless experience. Chief Minister Yogi Adityanath recently reviewed the arrangements, emphasizing safety, sanitation, and crowd management. Key developments include expanded ghats for bathing, an upgraded sewage system, and eco-friendly initiatives such as solar-powered facilities and plastic-free zones.</p>
@@ -181,23 +184,22 @@
             `
             }
         ];
+
         let currentPage = 1;
-        const itemsPerPage = 3;
-        const totalPages = Math.ceil(newsData.length / itemsPerPage);
+        const totalPages = newsData.length;
 
         function displayNews() {
-            const startIndex = (currentPage - 1) * itemsPerPage;
-            const endIndex = Math.min(startIndex + itemsPerPage, newsData.length);
             const newsList = document.getElementById('newsList');
             newsList.innerHTML = '';
 
-            for (let i = startIndex; i < endIndex; i++) {
-                const newsItem = document.createElement('div');
-                newsItem.classList.add('news-item');
-                newsItem.innerHTML = newsData[i].title;
-                newsItem.onclick = () => openNewsPage(i);
-                newsList.appendChild(newsItem);
-            }
+            const newsItem = newsData[currentPage - 1];
+            newsList.innerHTML = `
+                <div class="news-item">
+                    <h2>${newsItem.title}</h2>
+                    <img src="${newsItem.image}" alt="${newsItem.title}"/>
+                    <div>${newsItem.content}</div>
+                </div>
+            `;
 
             document.getElementById('prevBtn').disabled = currentPage === 1;
             document.getElementById('nextBtn').disabled = currentPage === totalPages;
@@ -208,38 +210,8 @@
             displayNews();
         }
 
-        function openNewsPage(index) {
-            const newsItem = newsData[index];
-            const newsList = document.getElementById('newsList');
-            const pagination = document.querySelector('.pagination');
-
-            // Hide the news list and pagination buttons
-            newsList.style.display = 'none';
-            pagination.style.display = 'none';
-
-            // Create a new div for the full news item
-            const newsDetail = document.createElement('div');
-            newsDetail.id = 'newsDetail';
-            newsDetail.innerHTML = `
-        <h1>${newsItem.title}</h1>
-        <p>${newsItem.content}</p>
-        <div class="pagination">
-            <button id="backBtn">Back to News</button>
-        </div>
-    `;
-            document.getElementById('newsContainer').appendChild(newsDetail);
-
-            // Add the event listener for the back button
-            document.getElementById('backBtn').onclick = function () {
-                newsDetail.remove(); // Remove the news detail
-                newsList.style.display = 'block'; // Show the news list
-                pagination.style.display = 'block'; // Show the pagination buttons
-                displayNews(); // Refresh the news list
-            };
-        }
         displayNews();
     </script>
-
 </body>
 
 </html>
